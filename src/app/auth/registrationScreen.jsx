@@ -1,0 +1,98 @@
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { Header } from "../components/header";
+
+export const RegistrationScreen = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty, isValid },
+    reset,
+    watch,
+  } = useForm({ mode: "onChange" });
+
+  const onSubmit = (data) => {
+    console.log("Name: ", data.name);
+    console.log("Email: ", data.email);
+    console.log("Password: ", data.password);
+    reset();
+  };
+  return (
+    <>
+      <div className="container">
+        <Header text={"Регистрация"} />
+        <section>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="inputGroup">
+              <input
+                {...register("name", {
+                  required: "Name is require field!",
+                })}
+                placeholder="Имя"
+                className="input__default"
+              />
+              <input
+                {...register("email", {
+                  required: "Email is require field!",
+                  pattern: {
+                    value:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  },
+                })}
+                placeholder="Email"
+                className="input__default"
+              />
+              <input
+                {...register("password", {
+                  required: true,
+                  minLength: {
+                    value: 5,
+                  },
+                })}
+                placeholder="Пароль"
+                type="password"
+                className="input__default"
+              />
+              <input
+                {...register("confirm_password", {
+                  required: true,
+                  validate: (val) => {
+                    if (watch("password") !== val) {
+                      return "Your passwords do no match";
+                    }
+                  },
+                })}
+                placeholder="Повторите пароль"
+                type="password"
+                className="input__default"
+              />
+              {/* Подсветить инпут */}
+              {/* Вывести ошибку "Пароли не совпадают" */}
+            </div>
+            <div className="buttonGroup">
+              <div className="desc__text">
+                Нажимая на кнопку, я принимаю
+                <a href="" className="desc__a">
+                  Пользовательское соглашение
+                </a>
+                и соглашаюсь
+                <a href="" className="desc__a">
+                  с Политикой конфиденциальности
+                </a>
+              </div>
+              <button className="btn__primary" disabled={!isDirty || !isValid}>
+                Зарегистрироваться
+              </button>
+            </div>
+          </form>
+        </section>
+        <footer>
+          <div className="footer_text">Уже есть аккаунт?</div>
+          <Link to={"/authScreen"} className="btn__link">
+            Войдите
+          </Link>
+        </footer>
+      </div>
+    </>
+  );
+};
