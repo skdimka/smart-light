@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import {FieldValues, useForm} from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Header } from "../components/headerStart";
 import AuthStore from "../../services/store";
@@ -16,7 +16,8 @@ const AuthScreen : React.FC = () => {
     reset,
   } = useForm({ mode: "onChange" });
 
-  const onSubmit = (data: { email: string, password: string }) => {
+  const onSubmit = (data: FieldValues) => {
+
     AuthStore.login(data.email, data.password);
     console.log("email: ", data.email);
     console.log("password: ", data.password);
@@ -33,6 +34,7 @@ const AuthScreen : React.FC = () => {
               {/* <EmailInput/>
               <PasswordInput /> */}
 
+              {/* TODO сделать паттерн константой */}
                <input
                 {...register("email", {
                   required: "Email is require field!",
@@ -70,11 +72,11 @@ const AuthScreen : React.FC = () => {
         </section>
         <footer>
           <div className="footer_text">Нет аккаунта?</div>
-          <Link to={"/registrationScreen"} className="btn__link">
+          <Link to={"/auth/sign-up"} className="btn__link">
             Зарегистрируйтесь
           </Link>
           <br></br>
-          <Link to={"/homeScreen"} className="btn__link">
+          <Link to={"/"} className="btn__link">
             homescrin
           </Link>
         </footer>

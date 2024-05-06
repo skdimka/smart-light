@@ -7,6 +7,7 @@ export const StartScreen = () => {
     <section>
       <div className="startScreen">
         <div className="startScreen__image">
+          {/* TODO Использовать React-SVG */}
           <Logo />
         </div>
 
@@ -18,10 +19,10 @@ export const StartScreen = () => {
         </div>
 
         <div className="buttonGroup">
-          <Link to={"/authScreen"} className="btn__primary">
+          <Link to={"/auth/sign-in"} className="btn__primary">
             Войти
           </Link>
-          <Link to={"/registrationScreen"} className="btn__secondary">
+          <Link to={"/auth/sign-up"} className="btn__secondary">
             Регистрация
           </Link>
         </div>

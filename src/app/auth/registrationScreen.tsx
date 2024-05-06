@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import { Header } from "../components/headerStart";
 import { AuthService } from "../../services/api.auth";
 
+type FieldValues = {
+  name: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+}
+
 export const RegistrationScreen : React.FC = () => {
   const {
     register,
@@ -11,14 +18,9 @@ export const RegistrationScreen : React.FC = () => {
     formState: { isDirty, isValid },
     reset,
     watch,
-  } = useForm({ mode: "onChange" });
+  } = useForm<FieldValues>({ mode: "onChange" });
 
-  const onSubmit = (data: {
-    name: string;
-    email: string;
-    password: string;
-    confirm_password: string;
-  }) => {
+  const onSubmit = (data: FieldValues) => {
     AuthService.registration(data.name, data.email, data.password);
     reset();
   };
@@ -51,6 +53,7 @@ export const RegistrationScreen : React.FC = () => {
               <input
                 {...register("password", {
                   required: true,
+                  // TODO ошибка ts
                   minLength: {
                     value: 5,
                   },

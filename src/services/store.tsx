@@ -52,6 +52,10 @@ class AuthStore {
     }
   }
 
+  SET_AUTH(value) {
+    this.isAuth = value;
+  }
+
   // при регистрации нужно сохранить токен
 }
 

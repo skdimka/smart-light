@@ -13,7 +13,12 @@ export const instance = axios.create({
 instance.interceptors.request.use(
     (config) => {
         config.headers.Authorization = `${localStorage.getItem("token")}`;
-        console.log("accessToken из localStorage", localStorage.getItem("token"));
+
+        // TODO console.log if development
+        if (process.env.NODE_ENV === "development") {
+            console.log("accessToken из localStorage", localStorage.getItem("token"));
+        }
+
         return config
     }
 )
@@ -28,14 +33,17 @@ instance.interceptors.response.use(
             const originalRequest = { ...error.config, _isRetry: true };
 
             try {
-                // если ts то ругается на _isRetry
-                const resp = await instance.post('/api/auth/refresh', null, { _isRetry: true })
+              // TODO использовать ts-ignor
+              // @ts-ignore
+              const resp = await instance.post('/api/auth/refresh', null, { _isRetry: true })
                 localStorage.setItem("token", resp.data.accessToken);
 
-                redirect("/homeScreen")
+                // TODO убрать редирект и использовать мутации store, редиректы уже настроены
+                AuthStore.SET_AUTH(true)
                 return instance.request(originalRequest);
             } catch (e) {
-                console.log("AUTH ERROR");
+                // TODO console.error
+                console.error("AUTH ERROR");
                 // navigate("/AuthScreen")
             }
         }

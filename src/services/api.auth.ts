@@ -1,5 +1,5 @@
 // import axios from "axios"
-import { instance } from "./api.config.js";
+import { instance } from "./api.config";
 
 export const AuthService = {
    login (email : string, password : string) {
