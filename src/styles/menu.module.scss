@@ -1,0 +1,42 @@
+// Меню
+
+.menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-evenly;
+  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+  background-color: $app-bg-color;
+
+  &__item {
+    padding: 10px;
+    margin: 8px;
+    margin-bottom: 20px;
+    border: none;
+    background: none;
+    text-decoration: none;
+
+    &__svg {
+      text-align: center;
+      margin-bottom: 3px;
+      color: $text-secondary-color;
+    }
+
+    &__text {
+      @include text__navigation;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+}
+
+.svg-active {
+  color: $primary-color;
+}
+
+.menu__item__text-active {
+  color: $text-color;
+}

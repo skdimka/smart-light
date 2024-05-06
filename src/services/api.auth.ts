@@ -2,18 +2,17 @@
 import { instance } from "./api.config.js";
 
 export const AuthService = {
-   // async getAuth(data: object) {
-   //  const response = await axios.post("http://5.35.98.199/api/auth/sign-in", data
-   //  )
-   //  return response.data
-   // }
-
-   login (email, password) {
+   login (email : string, password : string) {
       return instance.post("/api/auth/sign-in", { email, password })
-  },
 
-   refreshToken() {
-   return instance.get("/api/auth/refresh");
+   },
+
+   registration(name : string, email : string, password : string) {
+      return instance.post("/api/auth/sign-up", {name, email, password})
+   },
+
+   refresh() {
+   return instance.post("/api/auth/refresh");
    },
 
    logout() {

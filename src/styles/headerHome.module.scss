@@ -1,0 +1,66 @@
+.header__container {
+  display: flex;
+  flex-direction: column;
+  background-color: $app-bg-color;
+  //   border: 1px solid violet;
+
+  &-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // padding: 32px;
+    padding: 32px 20px;
+    // padding-left: 0px;
+    // border: 1px solid salmon;
+
+    &-text {
+      padding: 0;
+      color: black;
+      font-size: 20px;
+      line-height: 26px;
+      font-weight: 600;
+    }
+  }
+}
+
+// Tabs
+
+.swiper-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.Swiper__tabs {
+  max-width: 100%;
+  //   padding: 0 20px;
+  //   border: 1px solid salmon;
+}
+
+.Swiper__tabs-slide {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0 12px 0 20px;
+  //   border: 1px solid black;
+  max-width: max-content;
+}
+
+.btn__tab {
+  @include text__button-small;
+  font-family: $font;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  background: none;
+  padding-bottom: 5px;
+  color: $text-blind-color;
+  margin: 0;
+  padding: 0;
+  //   border: 1px solid rgb(255, 0, 187);
+}
+
+.btn__tab-active {
+  color: black;
+  border-bottom: 2px solid $primary-color;
+}

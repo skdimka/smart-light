@@ -1,0 +1,75 @@
+// Кнопки
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.btn__primary,
+.btn__secondary,
+.btn__disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: $font;
+  margin-bottom: 10px;
+  min-height: 52px;
+}
+
+.btn__primary {
+  background: $primary-color;
+  color: $element-color;
+  border: none;
+  &:active {
+    background: $primary-dark-color;
+  }
+}
+
+.btn__secondary {
+  background: $element-color;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+
+  &:active {
+    color: $primary-dark-color;
+    border: 1px solid $primary-dark-color;
+  }
+}
+
+.btn__primary[disabled] {
+  background: $element-disabled-color;
+  color: $text-blind-color;
+  border: none;
+}
+
+.btn__secondary[disabled] {
+  background: $element-color;
+  color: $text-blind-color;
+  border: 1px solid $text-blind-color;
+}
+
+.btn__small {
+  background-color: $element-color;
+  color: $primary-color;
+  border: none;
+
+  &:active {
+    color: $primary-dark-color;
+  }
+}
+
+.btn__small[disabled] {
+  color: $text-blind-color;
+}
+
+.btn__link {
+  color: $primary-color;
+}
+
+.btn__back {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}

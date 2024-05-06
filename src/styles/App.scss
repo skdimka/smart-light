@@ -1,5 +1,12 @@
 @import "./variables.scss";
 @import "./mixins.scss";
+@import "./menu.module.scss";
+@import "./button.module.scss";
+@import "./input.module.scss";
+@import "./startScreen.module.scss";
+@import "./tab.module.scss";
+@import "./devices.module.scss";
+@import "./headerHome.module.scss";
 
 body {
   margin: 0;
@@ -11,12 +18,12 @@ body {
   // justify-content: center;
   // align-items: center;
   overflow: hidden;
+  height: 100%;
   // border: 2px solid #888888;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: $font;
 }
 
 .container {
@@ -24,8 +31,10 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
   // обработать это правильно
-  height: 667px;
+  // min-height: 100%;
+  min-height: 667px;
 }
 
 header {
@@ -57,15 +66,6 @@ section {
   // Убрать после адаптива
   // border: 2px solid #888888;
   min-width: 375px;
-}
-
-// Стартовый экран
-.startScreen {
-  &__image {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-  }
 }
 
 .text {
@@ -123,157 +123,12 @@ section {
   margin-bottom: 20px;
 }
 
-.desc__a {
+.desc__text-a {
   margin: auto 5px auto 5px;
+  font-family: $font;
 }
 
 h1,
 .text__h1 {
   @include text__h1;
-}
-
-// Кнопки
-.buttonGroup {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.btn__primary,
-.btn__secondary,
-.btn__disabled {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  border-radius: 8px;
-  font-family: $font;
-  // надо ли?
-  margin-bottom: 10px;
-  // margin-bottom: 5px;
-  // margin: 0 20px 5px 20px;
-  min-height: 52px;
-}
-
-.btn__primary {
-  background: $primary-color;
-  color: $element-color;
-  border: none;
-  // margin-bottom: 10px;
-
-  &:active {
-    background: $primary-dark-color;
-  }
-}
-
-.btn__secondary {
-  background: $element-color;
-  color: $primary-color;
-  border: 1px solid $primary-color;
-
-  &:active {
-    color: $primary-dark-color;
-    border: 1px solid $primary-dark-color;
-  }
-}
-
-.btn__primary[disabled] {
-  background: $element-disabled-color;
-  color: $text-blind-color;
-  border: none;
-}
-
-.btn__secondary[disabled] {
-  background: $element-color;
-  color: $text-blind-color;
-  border: 1px solid $text-blind-color;
-}
-
-.btn__small {
-  background-color: $element-color;
-  color: $primary-color;
-  border: none;
-
-  &:active {
-    color: $primary-dark-color;
-  }
-}
-
-.btn__small[disabled] {
-  color: $text-blind-color;
-}
-
-.btn__link {
-  color: $primary-color;
-}
-
-.btn__back {
-  display: flex;
-  align-items: center;
-  padding-right: 10px;
-}
-
-// Меню
-
-.menu {
-  display: flex;
-  justify-content: space-evenly;
-  // border: 2px solid #888888;
-  // margin: 10px 0 0 0;
-  // padding: 0;
-  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.1);
-
-  &__item {
-    padding: 10px;
-    margin: 8px;
-    margin-bottom: 20px;
-    border: none;
-    background: none;
-
-    &__svg {
-      text-align: center;
-      margin-bottom: 3px;
-      color: $text-secondary-color;
-    }
-
-    &__text {
-      @include text__navigation;
-      text-align: center;
-      white-space: nowrap;
-    }
-  }
-}
-
-.svg-active {
-  color: $primary-color;
-}
-
-.menu__item__text-active {
-  color: $text-color;
-}
-
-// Инпуты
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  // Временно
-  margin-bottom: 40px;
-}
-
-.input__default {
-  display: block;
-  border-radius: 8px;
-  font-family: $font;
-  // надо ли?
-  margin-bottom: 10px;
-  // margin-bottom: 5px;
-  // margin: 0 20px 5px 20px;
-  min-height: 48px;
-}
-
-.input__default {
-  background: $element-color;
-  color: $text-blind-color;
-  border: 1px solid $text-blind-color;
 }

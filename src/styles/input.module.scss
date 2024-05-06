@@ -1,0 +1,37 @@
+// Инпуты
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 0 20px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+}
+
+.input__default {
+  display: block;
+  border-radius: 8px;
+  font-family: $font;
+  margin-bottom: 10px;
+  min-height: 48px;
+  min-width: 100%;
+  background: $element-color;
+  color: $text-blind-color;
+  border: 1px solid $text-blind-color;
+  padding: 0 0 0 20px;
+}
+
+// Глазик
+
+.field__inner {
+  position: relative;
+}
+
+.field-switch {
+  position: absolute;
+  top: 55%;
+  right: 0px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1;
+}
