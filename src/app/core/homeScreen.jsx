@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header } from "../components/header";
+import { Menu } from "../core/menu";
 // import { DeviceService } from "../services/device.service";
 
 export const HomeScreen = () => {
@@ -17,7 +17,7 @@ export const HomeScreen = () => {
   return (
     <>
       <div className="container">
-        <Header text={"Добавить устройство"} />
+        <Menu />
       </div>
       {/* {device.map((dev) => (
         <div key={dev.id}>

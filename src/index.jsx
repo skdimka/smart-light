@@ -6,6 +6,7 @@ import { HomeScreen } from "./app/core/homeScreen";
 import { RegistrationScreen } from "./app/auth/registrationScreen";
 import { StartScreen } from "./app/auth/startScreen";
 import "./styles/App.scss";
+import App from "./app/App";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    {/* <RouterProvider router={router} /> */}
+    <App />
   </React.StrictMode>
 );

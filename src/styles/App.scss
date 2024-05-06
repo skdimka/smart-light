@@ -7,9 +7,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // вынести в общее св-ва
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   overflow: hidden;
   // border: 2px solid #888888;
 }
@@ -23,6 +23,9 @@ code {
   // вынести в общее св-ва
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  // обработать это правильно
+  height: 667px;
 }
 
 header {
@@ -216,8 +219,8 @@ h1,
   display: flex;
   justify-content: space-evenly;
   // border: 2px solid #888888;
-  margin: 10px 0 0 0;
-  padding: 0;
+  // margin: 10px 0 0 0;
+  // padding: 0;
   box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.1);
 
   &__item {
