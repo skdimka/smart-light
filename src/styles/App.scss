@@ -31,11 +31,12 @@ code {
   // вынести в общее св-ва
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  // justify-content: space-around;
+  justify-content: space-between;
 
   // обработать это правильно
   // min-height: 100%;
-  min-height: 667px;
+  // min-height: 667px;
 }
 
 header {

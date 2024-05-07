@@ -30,7 +30,7 @@ export const Field: React.FC<FieldProps> = ({
 
   const [_type, setType] = useState(type);
 
-  const handleChange = useCallback((e) => {
+  const handleChange = useCallback((e : any) => {
     onChange(e.target.value);
   }, []);
 
@@ -43,7 +43,6 @@ export const Field: React.FC<FieldProps> = ({
   return (
     <div className={classNames("field", { error })} {...attrs}>
       <div className={"field__inner"}>
-        {/* <label htmlFor={inputId}>{label}</label> */}
         <input
           id={inputId}
           placeholder={label}

@@ -1,7 +1,8 @@
 .devices-container {
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
+  overflow-y: scroll;
+  // flex: 1 0 auto;
   //   z-index: 0;
 }
 

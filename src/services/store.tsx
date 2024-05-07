@@ -1,8 +1,7 @@
+import React from "react";
 import { makeAutoObservable } from "mobx";
 import { AuthService } from "./api.auth";
-
 class AuthStore {
-  // navigate = useNavigate();
   isAuth : boolean = false;
   isAuthInProgress : boolean = false;
 
@@ -12,14 +11,13 @@ class AuthStore {
 
   async login(email : string, password : string) {
     this.isAuthInProgress = true;
-    // console.log('я тут');
     try {
       const resp = await AuthService.login(email, password);
       localStorage.setItem("token", resp.data.data);
       console.log("Логин, кладу токен в локал:", resp.data.data);
-      this.isAuth = true;
+      this.setAuth(true);
     } catch (err) {
-      console.log("login error при авторизации");
+      console.error("login error при авторизации",err);
     } finally {
       this.isAuthInProgress = false;
     }
@@ -30,10 +28,10 @@ class AuthStore {
     try {
       const resp = await AuthService.refresh();
       localStorage.setItem("token", resp.data.data);
-      this.isAuth = true;
-      //   redirect("/HomeScreen");
+      this.setAuth(true);
+      console.log("checkAuth: ", this.isAuth)
     } catch (err) {
-      console.log("login error при проверки авторизации");
+      console.error("login error при проверки авторизации",err);
     } finally {
       this.isAuthInProgress = false;
     }
@@ -43,20 +41,18 @@ class AuthStore {
     this.isAuthInProgress = true;
     try {
       await AuthService.logout();
-      this.isAuth = false;
+      this.setAuth(false);
       localStorage.removeItem("token");
     } catch (err) {
-      console.log("logout error при логаут");
+      console.error("logout error при логаут",err);
     } finally {
       this.isAuthInProgress = false;
     }
   }
 
-  SET_AUTH(value) {
+  setAuth(value : boolean) {
     this.isAuth = value;
   }
-
-  // при регистрации нужно сохранить токен
 }
 
 export default new AuthStore();

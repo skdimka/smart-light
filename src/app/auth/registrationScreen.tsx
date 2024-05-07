@@ -39,7 +39,7 @@ export const RegistrationScreen : React.FC = () => {
                 placeholder="Имя"
                 className="input__default"
               />
-              <input
+              {/* <input
                 {...register("email", {
                   required: "Email is require field!",
                   pattern: {
@@ -49,8 +49,8 @@ export const RegistrationScreen : React.FC = () => {
                 })}
                 placeholder="Email"
                 className="input__default"
-              />
-              <input
+              /> */}
+              {/* <input
                 {...register("password", {
                   required: true,
                   // TODO ошибка ts
@@ -61,7 +61,7 @@ export const RegistrationScreen : React.FC = () => {
                 placeholder="Пароль"
                 type="password"
                 className="input__default"
-              />
+              /> */}
               <input
                 {...register("confirm_password", {
                   required: true,
@@ -97,7 +97,7 @@ export const RegistrationScreen : React.FC = () => {
         </section>
         <footer>
           <div className="footer_text">Уже есть аккаунт?</div>
-          <Link to={"/authScreen"} className="btn__link">
+          <Link to={"/auth/sign-in"} className="btn__link">
             Войдите
           </Link>
         </footer>

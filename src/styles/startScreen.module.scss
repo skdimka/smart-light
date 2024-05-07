@@ -1,8 +1,7 @@
 // Стартовый экран
 .startScreen {
-  &__image {
+  &-image {
     display: flex;
     justify-content: center;
-    margin: auto;
   }
 }

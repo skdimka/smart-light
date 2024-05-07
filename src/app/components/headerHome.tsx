@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import { ReactSVG } from "react-svg";
 
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";

@@ -14,12 +14,12 @@ export const App = observer(() => {
     const menu: HTMLDivElement | null = document.querySelector('.menu')
 
     const handleResize = () => {
-
       const res = window.innerHeight - (header?.offsetHeight ?? 0) - (menu?.offsetHeight ?? 0)
       document.documentElement.style.setProperty('--vieport-height', `${res}px`)
     }
 
     handleResize();
+
     window.addEventListener("resize", handleResize);
     const observer = new ResizeObserver(handleResize);
     if (header) {
@@ -29,13 +29,16 @@ export const App = observer(() => {
 
   }, [])
 
+  useEffect(()=>{
+      if (localStorage.getItem("token")) {
+         AuthStore.checkAuth();
+  }
+  })
+
   return (
     // TODO Оптимизировать
-
     <BrowserRouter>
       <Routes>
-
-        // Маршруты в kebab-case
         <Route path={'/'} element={!AuthStore.isAuth && <Navigate to={'/auth'} /> }>
           <Route
               path="/"
@@ -51,7 +54,10 @@ export const App = observer(() => {
               path="/auth/sign-in"
               element={<AuthScreen />}
           />
-          <Route path="/auth/sign-up" element={<RegistrationScreen />}></Route>
+          <Route 
+              path="/auth/sign-up" 
+              element={<RegistrationScreen />}>
+          </Route>
         </Route>
 
         <Route path="*" element={<div>404... not found </div>} />

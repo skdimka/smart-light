@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/startScreen.svg";
+import { ReactSVG } from 'react-svg';
 
 export const StartScreen = () => {
   return (
-    <section>
-      <div className="startScreen">
-        <div className="startScreen__image">
-          {/* TODO Использовать React-SVG */}
-          <Logo />
+      <div className="container">
+        <div className="startScreen-image">
+          <ReactSVG src="/svg/startScreen.svg"/>
         </div>
 
         <div className="text">
@@ -27,6 +25,5 @@ export const StartScreen = () => {
           </Link>
         </div>
       </div>
-    </section>
   );
 };

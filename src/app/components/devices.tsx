@@ -12,8 +12,6 @@ export const Devices : React.FC<IDevacesArrProps> = ({devices}) => {
   return <>
     <div className="devices-container">
       <div className="devices-container-swaiper">
-
-      
       {devices.map(device =>(
           <Swiper
           slidesPerView={"auto"}
