@@ -12,4 +12,4 @@ import AuthStore from "./services/store";
 
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(<App />);
-})()
+})( ) 

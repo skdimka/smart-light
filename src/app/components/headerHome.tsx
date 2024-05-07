@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { ReactSVG } from "react-svg";
 
 
@@ -10,6 +10,21 @@ import { Pagination } from "swiper/modules";
 
 
 export const HeaderHome = () => {
+  const [swiper, setSwiper] = React.useState<any>(null);
+
+  useEffect(() => {
+    const handler = async () => {
+      await document.fonts.ready
+
+      swiper.update()
+    }
+
+    if (swiper) {
+      handler()
+    }
+
+  }, [swiper])
+
 
   return (
     <>
@@ -25,8 +40,10 @@ export const HeaderHome = () => {
 
       <div className="swiper-container">
         <Swiper
+          onSwiper={setSwiper}
           slidesPerView={"auto"}
-          spaceBetween={0}
+          watchOverflow={true}
+          spaceBetween={32}
           modules={[Pagination]}
           className="Swiper__tabs"
         >

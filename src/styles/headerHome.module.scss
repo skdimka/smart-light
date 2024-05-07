@@ -27,13 +27,20 @@
 
 .swiper-container {
   position: relative;
-  overflow: hidden;
+
+  &:has(.Swiper__tabs) {
+    margin: 0 20px;
+  }
 }
 
 .Swiper__tabs {
   max-width: 100%;
   //   padding: 0 20px;
   //   border: 1px solid salmon;
+
+  &.swiper {
+    overflow: visible;
+  }
 }
 
 .Swiper__tabs-slide {
@@ -41,9 +48,12 @@
   align-items: center;
   text-align: center;
   margin: 0;
-  padding: 0 12px 0 20px;
   //   border: 1px solid black;
-  max-width: max-content;
+
+  &.swiper-slide {
+    width: fit-content;
+    height: auto;
+  }
 }
 
 .btn__tab {
