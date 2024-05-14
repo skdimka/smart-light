@@ -1,9 +1,23 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
-import { AuthService } from "./api.auth";
+import { AuthService } from "./api.auth"
+interface Room {
+  id: string;
+  name: string;
+}
+
+interface Device {
+  id: string;
+  name: string;
+  type: string;
+  state: string;
+}
 class AuthStore {
   isAuth : boolean = false;
   isAuthInProgress : boolean = false;
+  rooms : Room[] = [];
+  devices : Device[]= [];
+  activeTab: any = null;
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -18,6 +32,7 @@ class AuthStore {
       this.setAuth(true);
     } catch (err) {
       console.error("login error при авторизации",err);
+      
     } finally {
       this.isAuthInProgress = false;
     }
@@ -29,7 +44,6 @@ class AuthStore {
       const resp = await AuthService.refresh();
       localStorage.setItem("token", resp.data.data);
       this.setAuth(true);
-      console.log("checkAuth: ", this.isAuth)
     } catch (err) {
       console.error("login error при проверки авторизации",err);
     } finally {
@@ -53,6 +67,60 @@ class AuthStore {
   setAuth(value : boolean) {
     this.isAuth = value;
   }
+
+  async fetchRoomData(roomId: string) {
+    try {
+      const response = await AuthService.getRoomDevices(roomId);
+      const devicesData = response.data.data.devices;
+      this.devices = devicesData;
+      console.log("Получаю список устройств в комнате: ", roomId);
+      console.log("devices: ", this.devices);
+    } catch (error) {
+      console.error("Ошибка при получении списка устройств в комнате: ", error);
+    }
+  }
+  
+  async fetchRooms(){
+    try {
+      const responseData = await AuthService.getRooms();
+      console.log("Получаю список комнат:", responseData.data.data);
+  
+      this.rooms = responseData.data.data;
+  
+      if (this.rooms.length > 0) {
+        const firstRoomId = this.rooms[0].id;
+        await this.fetchRoomData(firstRoomId);
+        this.activeTab = this.rooms[0].name;
+      }
+    } catch (err) {
+      console.error("Ошибка при получении списка комнат: ", err);
+    }
+  }
+
+  async deleteDevice(deviceId: string) {
+    try {
+      await AuthService.deleteDevice(deviceId);
+      this.devices = this.devices.filter(device => device.id !== deviceId);
+    } catch (error) {
+      console.error("Ошибка при удалении устройства:", error);
+    }
+  }
+  
+  async toggleDeviceState(deviceId: string, state : string ) {
+    try {
+      await AuthService.stateDevice(deviceId, state);
+      const updatedDevices = this.devices.map(device => {
+        if (device.id === deviceId) {
+          return { ...device, state };
+        }
+        return device;
+      });
+      this.devices = updatedDevices;
+    } catch (error) {
+      console.error("Ошибка при удалении устройства:", error);
+    }
+  }
+  
 }
 
 export default new AuthStore();

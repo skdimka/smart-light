@@ -14,7 +14,7 @@
   &__item {
     padding: 10px;
     margin: 8px;
-    margin-bottom: 20px;
+    margin-bottom: var(--margin-bottom);
     border: none;
     background: none;
     text-decoration: none;

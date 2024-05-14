@@ -32,15 +32,12 @@ instance.interceptors.response.use(
               const resp = await instance.post('/api/auth/refresh', null, { _isRetry: true })
                 localStorage.setItem("token", resp.data.accessToken);
 
-                // убрать редирект и использовать мутации store, редиректы уже настроены
                 AuthStore.setAuth(true)
-                console.log("сработал", AuthStore.isAuth);
 
                 return instance.request(originalRequest);
 
             } catch (e) {
                 console.error("AUTH ERROR");
-                // navigate("/sign-in")
             }
         }
         throw error;

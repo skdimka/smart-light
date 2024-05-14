@@ -1,24 +1,42 @@
 // Инпуты
-
 .inputGroup {
   display: flex;
   flex-direction: column;
   padding: 0 20px 0 20px;
-  margin-right: 20px;
-  margin-bottom: 40px;
+  margin-right: var(--margin-bottom);
+  // margin-bottom: 40px;
+  // border: 1px solid springgreen;
 }
 
 .input__default {
+  @include text__body-medium;
+  font: $font;
   display: block;
   border-radius: 8px;
   font-family: $font;
-  margin-bottom: 10px;
   min-height: 48px;
   min-width: 100%;
+  color: black;
   background: $element-color;
-  color: $text-blind-color;
+  // margin-bottom: var(--margin-bottom);
+  margin-top: 5px;
+  margin-bottom: 5px;
   border: 1px solid $text-blind-color;
   padding: 0 0 0 20px;
+}
+
+.input__default::placeholder {
+  color: $text-blind-color;
+}
+
+// Изменение инпута при ошибке
+.input__error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 0;
 }
 
 // Глазик

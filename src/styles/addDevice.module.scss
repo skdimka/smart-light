@@ -1,0 +1,35 @@
+.container-add_device {
+  margin-bottom: 20px;
+}
+
+.add_device {
+  display: flex;
+  align-items: center;
+  background-color: $element-color;
+  border-radius: 8px;
+  min-height: 58px;
+  margin: 20px;
+}
+
+.add-device-info {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.add_device-name,
+.add_device-room {
+  @include text__body-medium;
+  font: $font;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  min-height: 48px;
+  margin-bottom: 10px;
+  color: black;
+  border: 1px solid $text-blind-color;
+  padding: 0 0 0 20px;
+}
+
+.add_device-name {
+  width: calc(100% - 20px);
+}

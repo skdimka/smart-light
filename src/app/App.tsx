@@ -3,31 +3,16 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import AuthStore from "../services/store";
 import "../styles/App.scss";
-import {StartScreen} from "./auth/startScreen";
+import {StartScreen} from "./pages/startScreen";
 import AuthScreen from "./auth/authScreen";
 import {RegistrationScreen} from "./auth/registrationScreen";
-import {HomeScreen} from "./core/homeScreen";
+import {RegistrationSuccess} from "./pages/registrationSuccess";
+import {HomeScreen} from "./pages/homeScreen";
+import {AddDevice} from "./pages/addDevice";
+import { AddDeviceBluetooth } from "./pages/addDeviceBluetooth";
+import { AddDeviceSuccess } from "./pages/addDeviceSuccess";
 
 export const App = observer(() => {
-  useEffect(() => {
-    const header: HTMLDivElement | null = document.querySelector('.header__container')
-    const menu: HTMLDivElement | null = document.querySelector('.menu')
-
-    const handleResize = () => {
-      const res = window.innerHeight - (header?.offsetHeight ?? 0) - (menu?.offsetHeight ?? 0)
-      document.documentElement.style.setProperty('--vieport-height', `${res}px`)
-    }
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    const observer = new ResizeObserver(handleResize);
-    if (header) {
-      observer.observe(header);
-    }
-
-
-  }, [])
 
   useEffect(()=>{
       if (localStorage.getItem("token")) {
@@ -36,7 +21,6 @@ export const App = observer(() => {
   })
 
   return (
-    // TODO Оптимизировать
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={!AuthStore.isAuth && <Navigate to={'/auth'} /> }>
@@ -44,7 +28,28 @@ export const App = observer(() => {
               path="/"
               element={<HomeScreen />}
           />
-        </Route>
+          </Route>
+
+          <Route  
+                path="/registration-success" 
+                element={<RegistrationSuccess />}>
+          </Route>
+          
+          <Route  
+                path="/add-device" 
+                element={<AddDevice />}>
+          </Route>
+
+          <Route  
+                path="/add-device-bluetooth" 
+                element={<AddDeviceBluetooth />}>
+          </Route>
+
+          <Route  
+                path="/add-device-success" 
+                element={<AddDeviceSuccess />}>
+          </Route>
+        
         <Route path={'/auth'} element={AuthStore.isAuth && <Navigate to={'/'} /> }>
           <Route
               path="/auth"

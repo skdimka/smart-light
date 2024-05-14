@@ -1,8 +1,10 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { Header } from "../components/headerStart";
+import { Header } from "../components/headerScreen";
 import { AuthService } from "../../services/api.auth";
+import { Field } from "../components/field";
+import { isValidInput } from "../components/isValidInput";
 
 type FieldValues = {
   name: string;
@@ -13,11 +15,11 @@ type FieldValues = {
 
 export const RegistrationScreen : React.FC = () => {
   const {
-    register,
     handleSubmit,
-    formState: { isDirty, isValid },
+    formState: { isDirty, isValid, errors },
     reset,
-    watch,
+    control,
+    getValues
   } = useForm<FieldValues>({ mode: "onChange" });
 
   const onSubmit = (data: FieldValues) => {
@@ -27,59 +29,78 @@ export const RegistrationScreen : React.FC = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container light">
         <Header text={"Регистрация"} />
-        <section>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        
+          <form onSubmit={handleSubmit(onSubmit)} className={"form"}>
             <div className="inputGroup">
-              <input
-                {...register("name", {
-                  required: "Name is require field!",
-                })}
-                placeholder="Имя"
-                className="input__default"
-              />
-              {/* <input
-                {...register("email", {
-                  required: "Email is require field!",
-                  pattern: {
-                    value:
-                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  },
-                })}
-                placeholder="Email"
-                className="input__default"
-              /> */}
-              {/* <input
-                {...register("password", {
-                  required: true,
-                  // TODO ошибка ts
-                  minLength: {
-                    value: 5,
-                  },
-                })}
-                placeholder="Пароль"
-                type="password"
-                className="input__default"
-              /> */}
-              <input
-                {...register("confirm_password", {
-                  required: true,
-                  validate: (val) => {
-                    if (watch("password") !== val) {
-                      return "Your passwords do no match";
-                    }
-                  },
-                })}
-                placeholder="Повторите пароль"
-                type="password"
-                className="input__default"
-              />
-              {/* Подсветить инпут */}
-              {/* Вывести ошибку "Пароли не совпадают" */}
+
+            <Controller 
+                control={control} 
+                name="name" 
+                rules={{ required: true , validate: isValidInput.name}}
+                render= {({field}) => 
+                  <Field 
+                    value={field.value} 
+                    onChange={field.onChange} 
+                    label="Имя" 
+                    className={`input__default ${errors.name ? "input__error" : ""}`}
+                    type="name"
+                  />} 
+                />
+            {errors.name && <span className="error-message">Минимальная длинна - 2</span>}
+
+            <Controller 
+                control={control} 
+                name="email" 
+                rules={{ required: true, validate: isValidInput.email }}
+                render= {({field}) => 
+                  <Field 
+                    value={field.value} 
+                    onChange={field.onChange} 
+                    label="Email" 
+                    className={`input__default ${errors.email ? "input__error" : "" }`}
+                    type="email"
+                  />} 
+                />
+                
+            {errors.email && <span className="error-message">Некорректный email</span>}
+
+            <Controller 
+                control={control} 
+                name="password" 
+                rules={{ required: true, validate: isValidInput.password }}
+                render= {({field}) => 
+                  <Field 
+                    value={field.value}
+                    onChange={field.onChange} 
+                    label="Пароль" 
+                    className={`input__default ${errors.password ? "input__error" : ""}`}
+                    type="password"
+                  />}
+                 />
+
+            {errors.password && <span className="error-message">Минимальная длинна - 5</span>}
+
+            <Controller 
+                control={control} 
+                name="confirm_password"
+                rules={{ required: true, validate: value => isValidInput.passwordsMatch(value, getValues().password) }} 
+                render= {({field}) => 
+                  <Field 
+                    value={field.value}
+                    onChange={field.onChange} 
+                    label="Повторите пароль" 
+                    className={`input__default ${errors.confirm_password ? "input__error" : ""}`} 
+                    type="password"
+                  />}
+                 />
+
+            {errors.confirm_password && <span className="error-message">Пароли не совпадают</span>}
+
             </div>
-            <div className="buttonGroup">
-              <div className="desc__text">
+
+            <div className="desc__text">
                 Нажимая на кнопку, я принимаю
                 <a href="" className="desc__text-a">
                   Пользовательское соглашение
@@ -89,12 +110,15 @@ export const RegistrationScreen : React.FC = () => {
                   с Политикой конфиденциальности
                 </a>
               </div>
+
+            <div className="buttonGroup">
               <button className="btn__primary" disabled={!isDirty || !isValid}>
                 Зарегистрироваться
               </button>
             </div>
+
           </form>
-        </section>
+
         <footer>
           <div className="footer_text">Уже есть аккаунт?</div>
           <Link to={"/auth/sign-in"} className="btn__link">

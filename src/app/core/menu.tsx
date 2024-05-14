@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import { ReactSVG } from "react-svg";
-// import { ReactComponent as HomeSimple } from "../assets/icons/icons/homeSimple.svg";
 import { Link } from "react-router-dom";
 import AuthStore from "../../services/store";
 
@@ -26,7 +25,6 @@ export const Menu = () => {
           <ReactSVG src="/svg/cart.svg" className="menu__item__svg" />
           <div className="menu__item__text">Магазин</div>
         </button>
-        {/* <button className="menu__item"> */}
         <Link
           to={"/"}
           className="menu__item"
@@ -34,9 +32,7 @@ export const Menu = () => {
         >
           <ReactSVG src="/svg/log-out.svg" className="menu__item__svg" />
           <div className="menu__item__text">Выход</div>
-          {/* homescrin */}
         </Link>
-        {/* </button> */}
       </nav>
     </>
   );

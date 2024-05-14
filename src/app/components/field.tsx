@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import classNames from "classnames";
 import { uniqueId } from "lodash-es";
 import { ReactSVG } from "react-svg";
@@ -16,7 +16,7 @@ interface FieldProps {
 }
 
 export const Field: React.FC<FieldProps> = ({
-  value,
+  value = '',
   label,
   onChange,
   error,
@@ -30,18 +30,20 @@ export const Field: React.FC<FieldProps> = ({
 
   const [_type, setType] = useState(type);
 
-  const handleChange = useCallback((e : any) => {
-    onChange(e.target.value);
-  }, []);
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    onChange(value);
+  }, [onChange, type]);
 
   const handleTypeChange = useCallback(() => {
-    setType(_type === "password" ? "text" : "password");
+    setType(_type === "password" || "confirm_password" ? "text" : "password");
   }, [_type]);
 
   const inputId = uniqueId("input_");
 
+
   return (
-    <div className={classNames("field", { error })} {...attrs}>
+    <div className={classNames("field", {  error })} {...attrs}>
       <div className={"field__inner"}>
         <input
           id={inputId}
@@ -52,6 +54,7 @@ export const Field: React.FC<FieldProps> = ({
           value={value}
           required={required}
           className={className}
+          autoComplete={type === 'password' ? 'current-password' : type === 'email' ? 'email' : undefined}
         />
 
         {isPasswordType ? (
@@ -64,8 +67,6 @@ export const Field: React.FC<FieldProps> = ({
           </a>
         ) : undefined}
       </div>
-
-      {error ? <div className={"field__error"}>{error}</div> : undefined}
     </div>
   );
 };
