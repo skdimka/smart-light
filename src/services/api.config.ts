@@ -33,7 +33,6 @@ instance.interceptors.response.use(
                 localStorage.setItem("token", resp.data.accessToken);
 
                 AuthStore.setAuth(true)
-
                 return instance.request(originalRequest);
 
             } catch (e) {

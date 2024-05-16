@@ -1,10 +1,11 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { Header } from "../components/headerScreen";
-import { AuthService } from "../../services/api.auth";
+import { Header } from "../components/headerTemplate";
 import { Field } from "../components/field";
 import { isValidInput } from "../components/isValidInput";
+import { action } from "mobx";
+import AuthStore  from "../../services/store"
 
 type FieldValues = {
   name: string;
@@ -23,9 +24,13 @@ export const RegistrationScreen : React.FC = () => {
   } = useForm<FieldValues>({ mode: "onChange" });
 
   const onSubmit = (data: FieldValues) => {
-    AuthService.registration(data.name, data.email, data.password);
+    AuthStore.registration(data.name, data.email, data.password);
     reset();
   };
+
+  action(() => {
+    AuthStore.registrationSuccess = false;
+  })();
 
   return (
     <>
@@ -100,7 +105,9 @@ export const RegistrationScreen : React.FC = () => {
 
             </div>
 
-            <div className="desc__text">
+            <div className="buttonGroup">
+
+              <div className="desc__text">
                 Нажимая на кнопку, я принимаю
                 <a href="" className="desc__text-a">
                   Пользовательское соглашение
@@ -111,7 +118,6 @@ export const RegistrationScreen : React.FC = () => {
                 </a>
               </div>
 
-            <div className="buttonGroup">
               <button className="btn__primary" disabled={!isDirty || !isValid}>
                 Зарегистрироваться
               </button>
@@ -120,7 +126,7 @@ export const RegistrationScreen : React.FC = () => {
           </form>
 
         <footer>
-          <div className="footer_text">Уже есть аккаунт?</div>
+          <div className="footer-text">Уже есть аккаунт?</div>
           <Link to={"/auth/sign-in"} className="btn__link">
             Войдите
           </Link>

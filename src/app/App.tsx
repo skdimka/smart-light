@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import AuthStore from "../services/store";
@@ -8,48 +8,40 @@ import AuthScreen from "./auth/authScreen";
 import {RegistrationScreen} from "./auth/registrationScreen";
 import {RegistrationSuccess} from "./pages/registrationSuccess";
 import {HomeScreen} from "./pages/homeScreen";
-import {AddDevice} from "./pages/addDevice";
-import { AddDeviceBluetooth } from "./pages/addDeviceBluetooth";
+import {AddDevice} from "./pages/addDeviceScreen";
+import { AddDeviceBluetooth } from "./pages/вluetoothOn";
 import { AddDeviceSuccess } from "./pages/addDeviceSuccess";
 
 export const App = observer(() => {
-
-  useEffect(()=>{
-      if (localStorage.getItem("token")) {
-         AuthStore.checkAuth();
-  }
-  })
-
+  
   return (
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={!AuthStore.isAuth && <Navigate to={'/auth'} /> }>
           <Route
               path="/"
-              element={<HomeScreen />}
-          />
-          </Route>
+              element={<HomeScreen />}/>
 
           <Route  
                 path="/registration-success" 
-                element={<RegistrationSuccess />}>
-          </Route>
-          
+                element={<RegistrationSuccess />}/>
+
           <Route  
                 path="/add-device" 
-                element={<AddDevice />}>
-          </Route>
+                element={<AddDevice />}/>
 
-          <Route  
+
+          <Route 
                 path="/add-device-bluetooth" 
-                element={<AddDeviceBluetooth />}>
+                element={AuthStore.isCompleteAddDevice ? <Navigate to="/add-device-success" /> : <AddDeviceBluetooth />} />
+          
+          <Route 
+                path="/add-device-success" 
+                element={<AddDeviceSuccess />} />
+        
           </Route>
 
-          <Route  
-                path="/add-device-success" 
-                element={<AddDeviceSuccess />}>
-          </Route>
-        
+
         <Route path={'/auth'} element={AuthStore.isAuth && <Navigate to={'/'} /> }>
           <Route
               path="/auth"
@@ -59,10 +51,12 @@ export const App = observer(() => {
               path="/auth/sign-in"
               element={<AuthScreen />}
           />
+        </Route>
+
+        <Route path={'/auth'} element={AuthStore.registrationSuccess && <Navigate to={'/registration-success'} /> }>
           <Route 
               path="/auth/sign-up" 
-              element={<RegistrationScreen />}>
-          </Route>
+              element={<RegistrationScreen />}/>
         </Route>
 
         <Route path="*" element={<div>404... not found </div>} />

@@ -1,11 +1,8 @@
-// Инпуты
 .inputGroup {
   display: flex;
   flex-direction: column;
   padding: 0 20px 0 20px;
   margin-right: var(--margin-bottom);
-  // margin-bottom: 40px;
-  // border: 1px solid springgreen;
 }
 
 .input__default {
@@ -18,10 +15,9 @@
   min-width: 100%;
   color: black;
   background: $element-color;
-  // margin-bottom: var(--margin-bottom);
   margin-top: 5px;
   margin-bottom: 5px;
-  border: 1px solid $text-blind-color;
+  border: 1px solid $divider-color;
   padding: 0 0 0 20px;
 }
 
@@ -35,8 +31,9 @@
 }
 
 .error-message {
+  @include text__body-caption;
   color: red;
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 // Глазик

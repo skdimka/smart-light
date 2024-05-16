@@ -3,13 +3,14 @@
 @import "./mixins.scss";
 @import "./menu.module.scss";
 @import "./button.module.scss";
-@import "./input.module.scss";
-@import "./startScreen.module.scss";
-@import "./tab.module.scss";
+@import "./authInput.module.scss";
+@import "./swiperTab.module.scss";
+@import "./swiperDevice.module.scss";
 @import "./devices.module.scss";
 @import "./headerHome.module.scss";
 @import "./temleteScreen.module.scss";
-@import "./addDevice.module.scss";
+@import "./addDeviceScreen.module.scss";
+@import "./text.module.scss";
 
 #root {
   overflow-x: hidden;
@@ -34,112 +35,18 @@ code {
 .container {
   display: flex;
   flex-direction: column;
-  background-color: $app-bg-color;
-  min-height: 667px;
+  min-height: 100dvh;
 }
 
-// белый фон
 .light {
   background-color: $element-color;
 }
 
-// серый фон
 .gray {
   background-color: $app-bg-color;
-}
-
-.header {
-  display: flex;
-  margin: 32px 20px 32px 20px;
-  &-text {
-    margin-right: 20px;
-    flex: 1;
-    text-align: center;
-    @include text__body-small;
-  }
 }
 
 footer {
   text-align: center;
   margin-bottom: var(--margin-bottom);
-}
-
-.footer_text {
-  margin-bottom: 8px;
-}
-
-.text {
-  // вынести в константу
-  margin: var(--margin);
-  &__h1 {
-    // вынести цвет
-    color: black;
-    text-align: center;
-    margin-bottom: var(--margin-bottom);
-  }
-
-  &__body {
-    // вынести цвет
-    color: #888888;
-    text-align: center;
-    // вынести в константу
-    padding: 0 10px 0 10px;
-    margin-bottom: var(--margin-bottom);
-
-    @include text__body;
-  }
-
-  &__button {
-    @include text__button;
-  }
-
-  &__button-small {
-    @include text__button-small;
-  }
-
-  &__body-medium {
-    @include text__body-medium;
-  }
-
-  &__body-small {
-    @include text__body-small;
-  }
-
-  &__body-caption {
-    @include text__body-caption;
-  }
-
-  &__navigation {
-    @include text__navigation;
-  }
-}
-
-// поравить
-.desc__text {
-  @include text__body-caption;
-  text-align: center;
-  line-height: 20px;
-  // margin-bottom: var(--margin-bottom);
-
-  padding: 0;
-  margin-top: 20px;
-  margin: 10px;
-}
-
-.desc__text-a {
-  margin: auto 2px;
-  text-decoration: none;
-  font-family: $font;
-}
-
-h1,
-.text__h1 {
-  @include text__h1;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
 }

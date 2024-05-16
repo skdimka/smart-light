@@ -18,6 +18,7 @@ const ButtonGroup  : React.FC<ButtonGroupProps> = ({buttons}) => {
             <Link
               className={button.className || "btn__primary"} 
               to={button.link}
+              key={button.link}
               >
                 {button.text}
              </Link>

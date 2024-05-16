@@ -15,9 +15,12 @@ interface Device {
 class AuthStore {
   isAuth : boolean = false;
   isAuthInProgress : boolean = false;
+  registrationSuccess : boolean = false;
   rooms : Room[] = [];
   devices : Device[]= [];
   activeTab: any = null;
+  isCompleteAddDevice : boolean = false;
+  lastAddedDeviceName : string = "";
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -28,7 +31,9 @@ class AuthStore {
     try {
       const resp = await AuthService.login(email, password);
       localStorage.setItem("token", resp.data.data);
-      console.log("Логин, кладу токен в локал:", resp.data.data);
+      if (process.env.NODE_ENV === "development") {
+        console.log("Логин, кладу токен в локал:", resp.data.data);
+    }
       this.setAuth(true);
     } catch (err) {
       console.error("login error при авторизации",err);
@@ -48,6 +53,23 @@ class AuthStore {
       console.error("login error при проверки авторизации",err);
     } finally {
       this.isAuthInProgress = false;
+    }
+  }
+
+  async registration(name : string, email : string, password : string) {
+    try {
+      const resp = await AuthService.registration(name, email, password);
+      localStorage.setItem("token", resp.data.data);
+      
+
+      if (process.env.NODE_ENV === "development") {
+        console.log("Регистрация, кладу токен в локал:", resp.data.data);
+    }
+      this.registrationSuccess = true;
+      this.setAuth(true);
+    } catch (err) {
+      console.error("Registration error при регистрации",err);
+      
     }
   }
 
@@ -73,8 +95,10 @@ class AuthStore {
       const response = await AuthService.getRoomDevices(roomId);
       const devicesData = response.data.data.devices;
       this.devices = devicesData;
-      console.log("Получаю список устройств в комнате: ", roomId);
-      console.log("devices: ", this.devices);
+      if (process.env.NODE_ENV === "development") {
+        console.log("Получаю список устройств в комнате: ", roomId);
+        console.log("devices: ", this.devices); 
+      }
     } catch (error) {
       console.error("Ошибка при получении списка устройств в комнате: ", error);
     }
@@ -83,6 +107,7 @@ class AuthStore {
   async fetchRooms(){
     try {
       const responseData = await AuthService.getRooms();
+
       console.log("Получаю список комнат:", responseData.data.data);
   
       this.rooms = responseData.data.data;
@@ -118,6 +143,16 @@ class AuthStore {
       this.devices = updatedDevices;
     } catch (error) {
       console.error("Ошибка при удалении устройства:", error);
+    }
+  }
+
+ async addNewDevice(name: string, type : string, roomId : string) {
+    try {
+      await AuthService.addNewDevice(name, type, roomId);
+      this.isCompleteAddDevice = true;
+      this.lastAddedDeviceName= name;
+    } catch (error) {
+      console.error("Ошибка при добавлении устройства:", error);
     }
   }
   

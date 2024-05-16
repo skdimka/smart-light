@@ -7,8 +7,9 @@ import "../../styles/App.scss";
 import { Pagination } from "swiper/modules";
 import { Devices } from "./devices";
 import AuthStore  from "../../services/store"
-import { AuthService } from "../../services/api.auth";
-
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { action } from "mobx";
   interface Room {
     id: string;
     name: string;
@@ -19,6 +20,11 @@ export const HeaderHome = () => {
   const [devices, setDevicesArr] = React.useState<any>([]);
   const [swiper, setSwiper] = React.useState<any>(null);
   const [roomsData, setRoomsData] = useState<Room[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  action(() => {
+    AuthStore.isCompleteAddDevice = false;
+  })();
 
   useEffect(() => {
     const handler = async () => {
@@ -51,15 +57,34 @@ export const HeaderHome = () => {
     setActiveTab(room.name);
   };
 
+  const handleSvgLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <>
-      <div className="header__container">
-        <div className="header__container-section">
-          <div className="header__container-section-text">Мой дом</div>
-          <ReactSVG
+    <div className="header__container">
+      <div className="header__container-section">
+        <div className="header__container-section-text">
+          {AuthStore.rooms.length > 0 ? (
+            "Мой дом"
+          ) : (
+            isLoading && <Skeleton width={100} height={30} />
+          )}
+        </div>
+        {AuthStore.rooms.length > 0 ? (
+            <ReactSVG
             src="/svg/photo.svg"
             className="menu__item-svg"
+            afterInjection={() => handleSvgLoad()}
           />
+          ) : (
+          isLoading && 
+            <div className="menu__item-svg">
+              <Skeleton circle={true} height={40} width={40} />
+            </div>
+          )}
+
       </div>
 
       <div className="swiper-container">
@@ -71,72 +96,32 @@ export const HeaderHome = () => {
           modules={[Pagination]}
           className="Swiper__tabs"
         >
-           <SwiperSlide className="Swiper__tabs-slide">
-              {roomsData.map((room) => (
-              <button
-                key={room.id}
-                className={`btn__tab ${
-                  activeTab === room.name ? "btn__tab-active" : ""
-              }`}
-                onClick={() => handleTabClick(room)}
-              >
-                {room.name}
-              </button>
-            ))}
-          </SwiperSlide>
-        
+          {AuthStore.rooms.length > 0 ? (
+            roomsData.map((room) => (
+              <SwiperSlide className="Swiper__tabs-slide" key={room.id}>
+                <button
+                  key={room.id}
+                  className={`btn__tab ${
+                    activeTab === room.name ? "btn__tab-active" : ""
+                  }`}
+                  onClick={() => handleTabClick(room)}
+                >
+                  {room.name}
+                </button>
+              </SwiperSlide>
+            ))
+          ) : (
+            isLoading && 
+            (
+              <div style={{ marginBottom: "5px" }}>
+                <Skeleton count={1} height={30} />
+              </div>
+            )
+          )}
         </Swiper>
       </div>
-      </div>
-      <Devices devices={devices}/>
-    </>
+    </div>
+    <Devices devices={devices} />
+  </>
   );
 };
-
-
-  
-
-
-
-          {/* <SwiperSlide className="Swiper__tabs-slide">
-            <button
-              className={`btn__tab ${
-                activeTab === "Спальня" ? "btn__tab-active" : ""
-              }`}
-              onClick={() => handleTabClick("Спальня", 0)}
-            >
-              Спальня
-            </button>
-          </SwiperSlide>
-
-          <SwiperSlide className="Swiper__tabs-slide">
-            <button
-              className={`btn__tab ${
-                activeTab === "Гостинная" ? "btn__tab-active" : ""
-              }`}
-              onClick={() => handleTabClick("Гостинная", 1)}
-            >
-              Гостинная
-            </button>
-          </SwiperSlide>
-
-          <SwiperSlide className="Swiper__tabs-slide">
-            <button 
-              className={`btn__tab ${
-                activeTab === "Кухня" ? "btn__tab-active" : ""
-              }`}
-              onClick={() => handleTabClick("Кухня", 2)}>
-              Кухня
-            </button>
-          </SwiperSlide>
-
-          <SwiperSlide className="Swiper__tabs-slide">
-            <button
-              className={`btn__tab ${
-                activeTab === "Детская комната" ? "btn__tab-active" : ""
-              }`}
-              onClick={() => handleTabClick("Детская комната", 3)}
-            >
-              Детская комната
-            </button>
-          </SwiperSlide> */}

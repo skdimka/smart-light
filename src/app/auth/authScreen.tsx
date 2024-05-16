@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import {Controller, useForm} from "react-hook-form";
 import { Link } from "react-router-dom";
-import { Header } from "../components/headerScreen";
+import { Header } from "../components/headerTemplate";
 import AuthStore from "../../services/store";
 import { observer } from "mobx-react-lite";
 import { Field } from "../components/field";
@@ -25,13 +25,14 @@ const AuthScreen : React.FC = () => {
     reset();
   };
 
+
   return (
     <>
       <div className="container light">
         <Header text={"Авторизация"} />
+           
           <form onSubmit={handleSubmit(onSubmit)} className="form">
             <div className="inputGroup">
-
               <Controller 
                 control={control} 
                 name="email"
@@ -47,6 +48,7 @@ const AuthScreen : React.FC = () => {
                 />
 
               {errors.email && <span className="error-message">Некорректный email</span>}  
+              
 
               <Controller 
                 control={control} 
@@ -75,7 +77,7 @@ const AuthScreen : React.FC = () => {
             
           </form>
         <footer>
-          <div className="footer_text">Нет аккаунта?</div>
+          <div className="footer-text">Нет аккаунта?</div>
           <Link to={"/auth/sign-up"} className="btn__link">
             Зарегистрируйтесь
           </Link>

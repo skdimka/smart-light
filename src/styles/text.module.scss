@@ -1,0 +1,64 @@
+.text {
+  margin: var(--margin);
+  &__h1 {
+    color: black;
+    text-align: center;
+    margin-bottom: var(--margin-bottom);
+  }
+
+  &__body {
+    color: $text-secondary-color;
+    text-align: center;
+    padding: 0 10px 0 10px;
+    margin-bottom: var(--margin-bottom);
+
+    @include text__body;
+  }
+
+  &__button {
+    @include text__button;
+  }
+
+  &__button-small {
+    @include text__button-small;
+  }
+
+  &__body-medium {
+    @include text__body-medium;
+  }
+
+  &__body-small {
+    @include text__body-small;
+  }
+
+  &__body-caption {
+    @include text__body-caption;
+  }
+
+  &__navigation {
+    @include text__navigation;
+  }
+}
+
+.desc__text {
+  @include text__body-caption;
+  text-align: center;
+  line-height: 20px;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.desc__text-a {
+  margin: auto 2px;
+  text-decoration: none;
+  font-family: $font;
+}
+
+h1,
+.text__h1 {
+  @include text__h1;
+}
+
+.footer-text {
+  margin-bottom: 8px;
+}

@@ -6,10 +6,9 @@ interface ImageScreenProps {
 }
 
 const ImageScreen : React.FC<ImageScreenProps> = ({theme}) => {
-  // либо переделать на стили 
   const backgroundColor = theme === 'gray' ? '#f5f7f9' : '#ffffff';
   return (
-    <div className="startScreen-image">
+    <div className="image">
     <ReactSVG 
       src="/svg/startScreenNew.svg" 
       beforeInjection={(svg) => {

@@ -1,14 +1,11 @@
 import React, { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
-import { Header } from '../components/headerScreen'
+import { Header } from '../components/headerTemplate'
 import ImageScreen from '../components/imageScreen'
 import TextBlock from '../components/textBlock'
-import { ReactSVG } from 'react-svg'
 import { INewDevices } from '../interfaces/devices.interface'
 import { DeviceList } from '../components/DeviceList'
-import { Loader } from '../components/loader'
-
-
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 interface TempleteScreenProps {
     headerText?: string;
     TextBlockHeading?: string;
@@ -31,19 +28,21 @@ export const TempleteScreen : React.FC<TempleteScreenProps> = ({
     theme 
 } ) => {
   return (
-    <div className={"container" && theme}>
+    <div className={`container ${theme}`}>
+
     {headerText && <Header
       text={headerText}
       />}
 
     <div className="section">
-      {showImage && <ImageScreen theme={theme || 'gray'}/>}
+       { showImage && <ImageScreen theme={theme || 'gray'}/>}
       <TextBlock
         heading = {TextBlockHeading} 
         text = {TextBlockText} 
         />
     
     {( devices && <DeviceList devices={devices} loader={loader}/>)}
+
     </div>
     {children}
   </div>

@@ -1,0 +1,48 @@
+.swiper-container {
+  font-family: $font;
+  position: relative;
+
+  &:has(.Swiper__tabs) {
+    margin: 0 20px;
+  }
+}
+
+.Swiper__tabs {
+  max-width: 100%;
+  min-height: 20px;
+
+  &.swiper {
+    overflow: visible;
+  }
+}
+
+.Swiper__tabs-slide {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  //   border: 1px solid black;
+
+  &.swiper-slide {
+    width: fit-content;
+    height: auto;
+  }
+}
+
+.btn__tab {
+  @include text__button-small;
+  font-family: $font;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  background: none;
+  padding-bottom: 5px;
+  color: $text-blind-color;
+  margin: 0;
+  padding: 0;
+}
+
+.btn__tab-active {
+  color: black;
+  border-bottom: 2px solid $primary-color;
+}

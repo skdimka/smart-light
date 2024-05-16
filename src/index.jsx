@@ -2,6 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { App } from "./app/App";
 import "./styles/App.scss";
+import AuthStore from "./services/store";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+(async () => {
+  await AuthStore.checkAuth();
+
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
+})();

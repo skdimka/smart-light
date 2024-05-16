@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { ReactSVG } from "react-svg";
 import { IDevacesArrProps } from "../interfaces/devices.interface";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import SwiperCore, { Pagination } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import AuthStore from "../../services/store"
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export const Devices: React.FC<IDevacesArrProps> = observer(() => {
   const handleDeleteDevice = async (deviceId: string) => {
@@ -31,17 +33,18 @@ export const Devices: React.FC<IDevacesArrProps> = observer(() => {
   return <>
     <div className="devices-container">
       <div className="devices-container-swaiper">
-      {AuthStore.devices.length > 0 ? (
+      {AuthStore.rooms.length > 0 ? (
       AuthStore.devices.map((device) =>(
           <Swiper
           slidesPerView={"auto"}
           spaceBetween={0}
           modules={[Pagination]}
           className="Swiper__devices"
+          key = {device.id}
         >
-              <SwiperSlide className="Swiper__devices-slide">
+              <SwiperSlide className="Swiper__devices-slide" key = {device.id} >
                 
-                <div key={device.id} className="device">
+                <div className="device" key={device.id} >
                   <ReactSVG src={`/svg/${device.type}.svg`} className="device-svg" />
                   <div className="device-name">{device.name}</div>
                   <button 
@@ -69,17 +72,23 @@ export const Devices: React.FC<IDevacesArrProps> = observer(() => {
         </Swiper>
         ) )
       ) : (
-        <div className="device">
-          <div className="device-name">Пока пусто </div>
-        </div>
+        <Skeleton count={5} height={70} />
       )}
 
       </div>
         
+      {AuthStore.devices.length > 0 ? (
         <div className="device-add">
          <ReactSVG src="/svg/Vector.svg" className="device-add-svg" />
          <Link to="/add-device" className="device-add-text">Добавить устройство</Link>
         </div>
+      ) : (
+        <div style={{ marginTop: "10px" }}>
+          <Skeleton count={1} height={20}/> 
+        </div>
+        )
+      }
+
 
       </div>
   </>;

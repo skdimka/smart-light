@@ -33,7 +33,7 @@ export const AuthService = {
    return instance.delete(`/api/device/${deviceId}`)
    },
 
-   stateDevice(deviceId : string, state : string ){
+   stateDevice(deviceId : string, state : string){
    return instance.put(`/api/device/${deviceId}`, {state} )   
    }
 
