@@ -1,11 +1,11 @@
 import React from 'react'
 import { ReactSVG } from 'react-svg';
-import { INewDevices } from '../interfaces/devices.interface';
-import AuthStore from "../../services/store"
+import AuthStore from "../store/store"
 import {Controller, useForm} from "react-hook-form";
 import { Field } from "../components/field";
-import { isValidInput } from "../components/isValidInput";
-import { Loader } from './loader';
+import { isValidInput } from "../utils/isValidInput";
+import Loader from './loader';
+import { IDevices } from '../components/devices'
 
 type FieldValues = {
     name: string;
@@ -14,11 +14,12 @@ type FieldValues = {
   }
 
 interface DeviceProps {
-    devices: INewDevices[];
+    devices: IDevices[];
     loader?:boolean;
 }
 
-export const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
+
+const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
     const {
         register,
         handleSubmit,
@@ -54,7 +55,7 @@ export const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
                   value={field.value}
                   onChange={field.onChange}
                   label="Введите название устройства"
-                  className={`add_device-name ${errors.name ? "input__error" : ""}`}
+                  className={`add_device-name ${errors.name ? "add_device-name-error" : ""}`}
                   type="name"
                 />
               )}
@@ -100,3 +101,5 @@ export const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
     </>
   )
 }
+
+export default DeviceList

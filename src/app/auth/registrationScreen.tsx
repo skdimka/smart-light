@@ -1,11 +1,11 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { Header } from "../components/headerTemplate";
+import Header from "../components/headerTemplate";
 import { Field } from "../components/field";
-import { isValidInput } from "../components/isValidInput";
+import { isValidInput } from "../utils/isValidInput";
 import { action } from "mobx";
-import AuthStore  from "../../services/store"
+import AuthStore  from "../store/store"
 
 type FieldValues = {
   name: string;

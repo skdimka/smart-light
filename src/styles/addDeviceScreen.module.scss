@@ -32,4 +32,14 @@
 
 .add_device-name {
   width: calc(100% - 20px);
+  &-error {
+    border-color: red;
+  }
+}
+
+.add_device-room {
+  appearance: none;
+  background-image: url("../../public/svg/option.svg");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
 }

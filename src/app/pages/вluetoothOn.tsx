@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { TempleteScreen } from '../core/templeteScreen';
-import { INewDevices } from '../interfaces/devices.interface';
+import { IDevices } from '../components/devices';
 
 
 export const AddDeviceBluetooth = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [devices, setDevices] = useState<INewDevices[]>([]);
+    const [devices, setDevices] = useState<IDevices[]>([]);
 
       useEffect(() => {
         const socket = new WebSocket("ws://5.35.98.199:80/ws?api_key=LiU9dlsRWhDO0GZRqIGHk6Lw6qpuXzBE");

@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {observer} from "mobx-react-lite";
-import AuthStore from "../services/store";
+import AuthStore from "./store/store";
 import "../styles/App.scss";
 import {StartScreen} from "./pages/startScreen";
 import AuthScreen from "./auth/authScreen";
@@ -13,7 +13,7 @@ import { AddDeviceBluetooth } from "./pages/вluetoothOn";
 import { AddDeviceSuccess } from "./pages/addDeviceSuccess";
 
 export const App = observer(() => {
-  
+
   return (
     <BrowserRouter>
       <Routes>
@@ -53,7 +53,7 @@ export const App = observer(() => {
           />
         </Route>
 
-        <Route path={'/auth'} element={AuthStore.registrationSuccess && <Navigate to={'/registration-success'} /> }>
+        <Route path={'/auth'} element={AuthStore.registrationSuccess &&  <Navigate to={'/registration-success'} /> }>
           <Route 
               path="/auth/sign-up" 
               element={<RegistrationScreen />}/>

@@ -6,12 +6,20 @@ interface HeaderProps {
   text: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ text }) => {
+const Header: React.FC<HeaderProps> = ({ text }) => {
   const navigate = useNavigate();
+
+  const goBack = () => {
+    if (window.history?.length && window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate('/', { replace: true });
+    }
+  };
   return (
     <>
       <div className="header">
-        <Link onClick={() => navigate(-1)} className="btn__back" to={''}>
+        <Link onClick={goBack} className="btn__back" to={''}>
           <ReactSVG
             src="/svg/back.svg"
             className="menu__item__svg svg-active"
@@ -22,3 +30,5 @@ export const Header: React.FC<HeaderProps> = ({ text }) => {
     </>
   );
 };
+
+export default Header

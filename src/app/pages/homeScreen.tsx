@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { HeaderHome } from "../components/headerHome";
-import { Menu } from "../core/menu";
+import Menu from "../core/menu";
 
 export const HomeScreen = () => {
   useEffect(() => {

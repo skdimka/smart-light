@@ -1,14 +1,14 @@
 import React from 'react'
 import ButtonGroup from '../components/buttonGroup';
 import { TempleteScreen } from '../core/templeteScreen'
-import AuthStore from "../../services/store"
+import AuthStore from "../store/store"
+
+const buttons = [
+  { text: 'Вернуться на главную', link: '/' },
+];
 
 export const AddDeviceSuccess = () => {
   const name = AuthStore.lastAddedDeviceName;
-
-  const buttons = [
-      { text: 'Вернуться на главную', link: '/' },
-    ];
 
   return (
     <TempleteScreen 

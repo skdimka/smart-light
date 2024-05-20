@@ -1,6 +1,6 @@
-.text {
+.text-block {
   margin: var(--margin);
-  &__h1 {
+  &__heading {
     color: black;
     text-align: center;
     margin-bottom: var(--margin-bottom);
@@ -55,7 +55,7 @@
 }
 
 h1,
-.text__h1 {
+.text-block__heading {
   @include text__h1;
 }
 

@@ -7,9 +7,9 @@ interface TextBlockProps {
   
 const TextBlock : React.FC<TextBlockProps>  = ({heading, text}) => {
   return (
-    <div className="text">
-        <div className="text__h1">{heading}</div>
-        <div className="text__body">{text}</div>
+    <div className="text-block">
+        <div className="text-block__heading">{heading}</div>
+        <div className="text-block__body">{text}</div>
     </div>
   )
 }

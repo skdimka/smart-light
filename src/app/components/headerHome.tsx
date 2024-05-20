@@ -5,8 +5,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/App.scss";
 import { Pagination } from "swiper/modules";
-import { Devices } from "./devices";
-import AuthStore  from "../../services/store"
+import Devices from "./devices";
+import AuthStore  from "../store/store"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { action } from "mobx";
@@ -51,10 +51,11 @@ export const HeaderHome = () => {
   }, []);
 
 
-  const handleTabClick = async (room: Room) => {
+  const handleTabClick = async (room: Room, index : number) => {
     await AuthStore.fetchRoomData(room.id);
     setDevicesArr(AuthStore.devices);
     setActiveTab(room.name);
+    swiper.slideTo(index);
   };
 
   const handleSvgLoad = () => {
@@ -75,12 +76,12 @@ export const HeaderHome = () => {
         {AuthStore.rooms.length > 0 ? (
             <ReactSVG
             src="/svg/photo.svg"
-            className="menu__item-svg"
+            className="header__item-svg"
             afterInjection={() => handleSvgLoad()}
           />
           ) : (
           isLoading && 
-            <div className="menu__item-svg">
+            <div className="header__item-svg">
               <Skeleton circle={true} height={40} width={40} />
             </div>
           )}
@@ -92,19 +93,19 @@ export const HeaderHome = () => {
           onSwiper={setSwiper}
           slidesPerView={"auto"}
           watchOverflow={true}
-          spaceBetween={32}
+          spaceBetween={22}
           modules={[Pagination]}
           className="Swiper__tabs"
         >
           {AuthStore.rooms.length > 0 ? (
-            roomsData.map((room) => (
+            roomsData.map((room, index) => (
               <SwiperSlide className="Swiper__tabs-slide" key={room.id}>
                 <button
                   key={room.id}
                   className={`btn__tab ${
                     activeTab === room.name ? "btn__tab-active" : ""
                   }`}
-                  onClick={() => handleTabClick(room)}
+                  onClick={() => handleTabClick(room, index)}
                 >
                   {room.name}
                 </button>

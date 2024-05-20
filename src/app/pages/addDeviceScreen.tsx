@@ -2,11 +2,11 @@ import React from 'react'
 import ButtonGroup from '../components/buttonGroup';
 import { TempleteScreen } from '../core/templeteScreen'
 
-export const AddDevice = () => {
-    const buttons = [
-        { text: 'Включить Bluetooth', link: '/add-device-bluetooth' },
-      ];
+const buttons = [
+  { text: 'Включить Bluetooth', link: '/add-device-bluetooth' },
+];
 
+export const AddDevice = () => {
   return (
     <TempleteScreen 
         headerText = {"Добавить устройство"}  

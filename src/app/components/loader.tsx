@@ -1,7 +1,7 @@
 import React from 'react'
 import FadeLoader from 'react-spinners/FadeLoader'
 
-export const Loader = () => {
+const Loader = () => {
   return (
     <div className="loader">
       <FadeLoader 
@@ -12,3 +12,5 @@ export const Loader = () => {
     </div>
   )
 }
+
+export default Loader

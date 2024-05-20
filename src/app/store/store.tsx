@@ -1,6 +1,6 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
-import { AuthService } from "./api.auth"
+import { AuthService } from "../api/api.auth"
 interface Room {
   id: string;
   name: string;
@@ -34,6 +34,7 @@ class AuthStore {
       if (process.env.NODE_ENV === "development") {
         console.log("Логин, кладу токен в локал:", resp.data.data);
     }
+
       this.setAuth(true);
     } catch (err) {
       console.error("login error при авторизации",err);
