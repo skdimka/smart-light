@@ -19,6 +19,8 @@
   margin-bottom: 5px;
   border: 1px solid $divider-color;
   padding: 0 0 0 20px;
+  appearance: none;
+  outline: none;
 }
 
 .input__default::placeholder {
@@ -26,7 +28,7 @@
 }
 
 .input__default:focus {
-  border: 1px solid greenyellow;
+  border: 1px solid $primary-color;
 }
 
 // Изменение инпута при ошибке

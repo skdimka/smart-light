@@ -31,14 +31,16 @@ class AuthStore {
     try {
       const resp = await AuthService.login(email, password);
       localStorage.setItem("token", resp.data.data);
+
       if (process.env.NODE_ENV === "development") {
         console.log("Логин, кладу токен в локал:", resp.data.data);
-    }
+      }
 
       this.setAuth(true);
+      return null; 
     } catch (err) {
       console.error("login error при авторизации",err);
-      
+      return err;
     } finally {
       this.isAuthInProgress = false;
     }
@@ -61,16 +63,17 @@ class AuthStore {
     try {
       const resp = await AuthService.registration(name, email, password);
       localStorage.setItem("token", resp.data.data);
-      
 
       if (process.env.NODE_ENV === "development") {
         console.log("Регистрация, кладу токен в локал:", resp.data.data);
-    }
+      }
+
       this.registrationSuccess = true;
       this.setAuth(true);
+      return null;
     } catch (err) {
       console.error("Registration error при регистрации",err);
-      
+      return err;
     }
   }
 
@@ -96,10 +99,12 @@ class AuthStore {
       const response = await AuthService.getRoomDevices(roomId);
       const devicesData = response.data.data.devices;
       this.devices = devicesData;
+
       if (process.env.NODE_ENV === "development") {
         console.log("Получаю список устройств в комнате: ", roomId);
         console.log("devices: ", this.devices); 
       }
+
     } catch (error) {
       console.error("Ошибка при получении списка устройств в комнате: ", error);
     }
@@ -143,7 +148,7 @@ class AuthStore {
       });
       this.devices = updatedDevices;
     } catch (error) {
-      console.error("Ошибка при удалении устройства:", error);
+      console.error("Ошибка при включении/выключении устройства:", error);
     }
   }
 

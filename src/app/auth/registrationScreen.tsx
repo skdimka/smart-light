@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Header from "../components/headerTemplate";
@@ -23,9 +23,16 @@ export const RegistrationScreen : React.FC = () => {
     getValues
   } = useForm<FieldValues>({ mode: "onChange" });
 
-  const onSubmit = (data: FieldValues) => {
-    AuthStore.registration(data.name, data.email, data.password);
-    reset();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const onSubmit = async (data: FieldValues) => {
+    const error = await AuthStore.registration(data.name, data.email, data.password);
+    if (error) {
+      setErrorMessage("Ошибка регистрации");
+    } else {
+      setErrorMessage(null);
+      reset();
+    }
   };
 
   action(() => {
@@ -49,7 +56,7 @@ export const RegistrationScreen : React.FC = () => {
                     value={field.value} 
                     onChange={field.onChange} 
                     label="Имя" 
-                    className={`input__default ${errors.name ? "input__error" : ""}`}
+                    className={`input__default ${errors.name || errorMessage ? "input__error" : ""}`}
                     type="name"
                   />} 
                 />
@@ -64,7 +71,7 @@ export const RegistrationScreen : React.FC = () => {
                     value={field.value} 
                     onChange={field.onChange} 
                     label="Email" 
-                    className={`input__default ${errors.email ? "input__error" : "" }`}
+                    className={`input__default ${errors.email || errorMessage ? "input__error" : "" }`}
                     type="email"
                   />} 
                 />
@@ -80,7 +87,7 @@ export const RegistrationScreen : React.FC = () => {
                     value={field.value}
                     onChange={field.onChange} 
                     label="Пароль" 
-                    className={`input__default ${errors.password ? "input__error" : ""}`}
+                    className={`input__default ${errors.password || errorMessage ? "input__error" : ""}`}
                     type="password"
                   />}
                  />
@@ -96,12 +103,13 @@ export const RegistrationScreen : React.FC = () => {
                     value={field.value}
                     onChange={field.onChange} 
                     label="Повторите пароль" 
-                    className={`input__default ${errors.confirm_password ? "input__error" : ""}`} 
+                    className={`input__default ${errors.confirm_password || errorMessage ? "input__error" : ""}`} 
                     type="password"
                   />}
                  />
 
             {errors.confirm_password && <span className="error-message">Пароли не совпадают</span>}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
 
             </div>
 

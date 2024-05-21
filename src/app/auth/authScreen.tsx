@@ -20,19 +20,33 @@ const AuthScreen : React.FC = () => {
     control
   } = useForm<FieldValues>({ mode: "onChange" });
 
-  const onSubmit = (data: FieldValues) => {
-    AuthStore.login(data.email, data.password);
-    reset();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const onSubmit = async (data: FieldValues) => {
+    const error = await AuthStore.login(data.email, data.password);
+    if (error) {
+      setErrorMessage("Неверный логин или пароль");
+    } else {
+      setErrorMessage(null);
+      reset();
+    }
   };
 
+  const handleInputChange = () => {
+    if (errorMessage) {
+      setErrorMessage(null);
+    }
+  };
 
   return (
     <>
       <div className="container light">
         <Header text={"Авторизация"} />
-           
           <form onSubmit={handleSubmit(onSubmit)} className="form">
             <div className="inputGroup">
+
+            
+
               <Controller 
                 control={control} 
                 name="email"
@@ -40,9 +54,12 @@ const AuthScreen : React.FC = () => {
                 render= {({field}) => 
                   <Field 
                     value={field.value} 
-                    onChange={field.onChange} 
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleInputChange();
+                    }} 
                     label="Email" 
-                    className={`input__default ${errors.email ? "input__error" : ""}`} 
+                    className={`input__default ${errors.email || errorMessage ? "input__error" : ""}`} 
                     type="email"
                   />} 
                 />
@@ -57,12 +74,17 @@ const AuthScreen : React.FC = () => {
                 render= {({field}) => 
                   <Field 
                     value={field.value}
-                    onChange={field.onChange} 
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleInputChange();
+                    }}
                     label="Пароль" 
-                    className="input__default" 
+                    className={`input__default ${errorMessage ? "input__error" : ""}`} 
                     type="password"
                   />}
                 />
+
+              {errorMessage && <div className="error-message">{errorMessage}</div>}
             </div>
 
             <div className="buttonGroup">

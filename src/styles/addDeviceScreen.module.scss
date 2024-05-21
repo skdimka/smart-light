@@ -28,6 +28,8 @@
   min-height: 48px;
   color: black;
   padding: 0 0 0 20px;
+  appearance: none;
+  outline: none;
 }
 
 .add_device-name {
@@ -37,8 +39,12 @@
   }
 }
 
+.add_device-name:focus,
+.add_device-room:focus {
+  border: 1px solid $primary-color;
+}
+
 .add_device-room {
-  appearance: none;
   background-image: url("../../public/svg/option.svg");
   background-repeat: no-repeat;
   background-position: right 20px center;
