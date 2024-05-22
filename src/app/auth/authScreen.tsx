@@ -6,6 +6,7 @@ import AuthStore from "../store/store";
 import { observer } from "mobx-react-lite";
 import { Field } from "../components/field";
 import { isValidInput } from "../utils/isValidInput";
+import Loader from "../components/loader"
 
 type FieldValues = {
   email: string;
@@ -21,8 +22,10 @@ const AuthScreen : React.FC = () => {
   } = useForm<FieldValues>({ mode: "onChange" });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loader, setLoader] = useState<boolean>(false);
 
   const onSubmit = async (data: FieldValues) => {
+    setLoader(true);
     const error = await AuthStore.login(data.email, data.password);
     if (error) {
       setErrorMessage("Неверный логин или пароль");
@@ -30,6 +33,7 @@ const AuthScreen : React.FC = () => {
       setErrorMessage(null);
       reset();
     }
+    setLoader(false)
   };
 
   const handleInputChange = () => {
@@ -41,7 +45,10 @@ const AuthScreen : React.FC = () => {
   return (
     <>
       <div className="container light">
-        <Header text={"Авторизация"} />
+        {loader ? 
+        (<Loader/>) :
+         ( <>
+         <Header text={"Авторизация"} />
           <form onSubmit={handleSubmit(onSubmit)} className="form">
             <div className="inputGroup">
 
@@ -104,6 +111,8 @@ const AuthScreen : React.FC = () => {
             Зарегистрируйтесь
           </Link>
         </footer>
+        </>
+      )}
       </div>
     </>
   );

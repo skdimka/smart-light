@@ -6,6 +6,7 @@ import { Field } from "../components/field";
 import { isValidInput } from "../utils/isValidInput";
 import { action } from "mobx";
 import AuthStore  from "../store/store"
+import Loader from "../components/loader"
 
 type FieldValues = {
   name: string;
@@ -24,8 +25,10 @@ export const RegistrationScreen : React.FC = () => {
   } = useForm<FieldValues>({ mode: "onChange" });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loader, setLoader] = useState<boolean>(false);
 
   const onSubmit = async (data: FieldValues) => {
+    setLoader(true);
     const error = await AuthStore.registration(data.name, data.email, data.password);
     if (error) {
       setErrorMessage("Ошибка регистрации");
@@ -33,6 +36,7 @@ export const RegistrationScreen : React.FC = () => {
       setErrorMessage(null);
       reset();
     }
+    setLoader(false);
   };
 
   action(() => {
@@ -42,8 +46,11 @@ export const RegistrationScreen : React.FC = () => {
   return (
     <>
       <div className="container light">
+      { loader ?
+      <Loader/> 
+      : (
+      <>
         <Header text={"Регистрация"} />
-        
           <form onSubmit={handleSubmit(onSubmit)} className={"form"}>
             <div className="inputGroup">
 
@@ -139,6 +146,8 @@ export const RegistrationScreen : React.FC = () => {
             Войдите
           </Link>
         </footer>
+        </>
+      )}
       </div>
     </>
   );
