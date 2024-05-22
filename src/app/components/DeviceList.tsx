@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ReactSVG } from 'react-svg';
 import AuthStore from "../store/store"
 import {Controller, useForm} from "react-hook-form";
@@ -27,10 +27,20 @@ const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
         reset,
         control
       } = useForm<FieldValues>({ mode: "onChange" });
+
+      const [errorMessage, setErrorMessage] = useState<string | null>(null);
+      const [loaderScreen, setLoaderScreen] = useState<boolean>(false)
     
-      const onSubmit = (data: FieldValues) => {
-        AuthStore.addNewDevice(data.name, data.type, data.roomId)
-        reset();
+      const onSubmit = async (data: FieldValues) => {
+        setLoaderScreen(true);
+        const error = await AuthStore.addNewDevice(data.name, data.type, data.roomId)
+        if (error) {
+          setErrorMessage("Ошибка добавления");
+        } else {
+          setErrorMessage(null);
+          reset();
+        }
+        setLoaderScreen(false);
       };
       
     
@@ -40,12 +50,12 @@ const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
       {loader ? ( <Loader /> ) : (
     <>
       {devices?.map((device, index) => (
-        <div className="container-add_device" key={index}>
-          <div className="add_device-info device">
+        <div className="device-list__item" key={index}>
+          <div className="device-list__info device">
             <ReactSVG src={`/svg/${device.type}.svg`} className="device-svg" />
-            <div className="device-name">{device.name}</div>
+            <div className="device-list__name device-name">{device.name}</div>
           </div>
-          <div className="add-device">
+          <div className="device-list__form">
             <Controller
               control={control}
               name="name"
@@ -55,13 +65,13 @@ const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
                   value={field.value}
                   onChange={field.onChange}
                   label="Введите название устройства"
-                  className={`add_device-name ${errors.name ? "add_device-name-error" : ""}`}
+                  className={`device-list__input ${errors.name ? "device-list__input-error" : ""}`}
                   type="name"
                 />
               )}
             />
 
-            {errors.name && <span className="error-message">Минимальная длина - 2</span>}
+            {errors.name && <span className="device-list__error-message">Минимальная длина - 2</span>}
 
             <input type="hidden" {...register("type")} value={device.type} />
 
@@ -71,8 +81,8 @@ const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
               rules={{ required: true }}
               defaultValue=""
               render={({ field }) => (
-                <select {...field} className="add_device-room">
-                  <option value="" disabled className="add_device-room-option">
+                <select {...field} className="device-list__select">
+                  <option value="" disabled className="device-list__option">
                     Комната
                   </option>
                   {AuthStore.rooms.map((room) => (
@@ -83,12 +93,15 @@ const DeviceList: React.FC<DeviceProps> = ({ devices, loader }) => {
                 </select>
               )}
             />
+            
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+
           </div>
         </div>
       ))}
     </>
   )}
-        <div className="buttonGroup">
+        <div className="button-group">
           <button
             className="btn__primary"
             type="submit"

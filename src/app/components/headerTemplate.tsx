@@ -19,10 +19,10 @@ const Header: React.FC<HeaderProps> = ({ text }) => {
   return (
     <>
       <div className="header">
-        <Link onClick={goBack} className="btn__back" to={''}>
+        <Link onClick={goBack} className="header__btn-back" to={''}>
           <ReactSVG
             src="/svg/back.svg"
-            className="menu__item__svg svg-active"
+            className="header__btn-back__icon"
           />
         </Link>
         <div className="header-text">{text}</div>

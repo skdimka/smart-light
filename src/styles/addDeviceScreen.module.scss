@@ -1,51 +1,59 @@
-.container-add_device {
-  margin-bottom: 20px;
-}
-
-.add_device-info {
-  display: flex;
-  align-items: center;
-  background-color: $element-color;
-  border-radius: 8px;
-  min-height: 58px;
-  margin: 20px;
-  border-bottom: 2px solid $divider-color;
-}
-
-.add-device {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.add_device-name,
-.add_device-room {
-  @include text__body-medium;
-  font: $font;
-  border: 1px solid $divider-color;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  min-height: 48px;
-  color: black;
-  padding: 0 0 0 20px;
-  appearance: none;
-  outline: none;
-}
-
-.add_device-name {
-  width: calc(100% - 20px);
-  &-error {
-    border-color: red;
+.device-list {
+  &__item {
+    margin-bottom: 20px;
   }
-}
 
-.add_device-name:focus,
-.add_device-room:focus {
-  border: 1px solid $primary-color;
-}
+  &__info {
+    display: flex;
+    align-items: center;
+    background-color: $element-color;
+    border-radius: 8px;
+    min-height: 58px;
+    margin: 20px;
+    border-bottom: 2px solid $divider-color;
+  }
 
-.add_device-room {
-  background-image: url("../../public/svg/option.svg");
-  background-repeat: no-repeat;
-  background-position: right 20px center;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  &__input {
+    width: calc(100% - 20px);
+    &-error {
+      border-color: red;
+    }
+  }
+
+  &__select {
+    background-image: url("../../public/svg/option.svg");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+  }
+
+  &__error-message {
+    @include text__body-caption;
+    color: red;
+    margin-bottom: 5px;
+  }
+
+  &__input,
+  &__select {
+    @include text__body-medium;
+    font: $font;
+    border: 1px solid $divider-color;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    min-height: 48px;
+    color: black;
+    padding: 0 0 0 20px;
+    appearance: none;
+    outline: none;
+  }
+
+  &__input:focus,
+  &__select:focus {
+    border: 1px solid $primary-color;
+  }
 }

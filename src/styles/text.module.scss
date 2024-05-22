@@ -1,4 +1,7 @@
 .text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: var(--margin);
   &__heading {
     color: black;

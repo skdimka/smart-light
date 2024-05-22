@@ -50,7 +50,7 @@ const AuthScreen : React.FC = () => {
          ( <>
          <Header text={"Авторизация"} />
           <form onSubmit={handleSubmit(onSubmit)} className="form">
-            <div className="inputGroup">
+            <div className="input-group">
 
             
 
@@ -94,7 +94,7 @@ const AuthScreen : React.FC = () => {
               {errorMessage && <div className="error-message">{errorMessage}</div>}
             </div>
 
-            <div className="buttonGroup">
+            <div className="button-group">
               <button 
                 className="btn__primary"
                 disabled={!isDirty || !isValid}

@@ -38,9 +38,9 @@ class AuthStore {
 
       this.setAuth(true);
       return null; 
-    } catch (err) {
-      console.error("login error при авторизации",err);
-      return err;
+    } catch (error) {
+      console.error("login error при авторизации",error);
+      return error;
     } finally {
       this.isAuthInProgress = false;
     }
@@ -52,8 +52,8 @@ class AuthStore {
       const resp = await AuthService.refresh();
       localStorage.setItem("token", resp.data.data);
       this.setAuth(true);
-    } catch (err) {
-      console.error("login error при проверки авторизации",err);
+    } catch (error) {
+      console.error("login error при проверки авторизации",error);
     } finally {
       this.isAuthInProgress = false;
     }
@@ -71,9 +71,9 @@ class AuthStore {
       this.registrationSuccess = true;
       this.setAuth(true);
       return null;
-    } catch (err) {
-      console.error("Registration error при регистрации",err);
-      return err;
+    } catch (error) {
+      console.error("Registration error при регистрации",error);
+      return error;
     }
   }
 
@@ -83,8 +83,8 @@ class AuthStore {
       await AuthService.logout();
       this.setAuth(false);
       localStorage.removeItem("token");
-    } catch (err) {
-      console.error("logout error при логаут",err);
+    } catch (error) {
+      console.error("logout error при логаут",error);
     } finally {
       this.isAuthInProgress = false;
     }
@@ -123,8 +123,8 @@ class AuthStore {
         await this.fetchRoomData(firstRoomId);
         this.activeTab = this.rooms[0].name;
       }
-    } catch (err) {
-      console.error("Ошибка при получении списка комнат: ", err);
+    } catch (error) {
+      console.error("Ошибка при получении списка комнат: ", error);
     }
   }
 
@@ -157,8 +157,10 @@ class AuthStore {
       await AuthService.addNewDevice(name, type, roomId);
       this.isCompleteAddDevice = true;
       this.lastAddedDeviceName= name;
+      return null;
     } catch (error) {
       console.error("Ошибка при добавлении устройства:", error);
+      return error;
     }
   }
   

@@ -13,7 +13,7 @@ interface ButtonGroupProps{
 
 const ButtonGroup  : React.FC<ButtonGroupProps> = ({buttons}) => {
   return (
-    <div className="buttonGroup">
+    <div className="button-group">
           {buttons?.map((button) => (
             <Link
               className={button.className || "btn__primary"} 

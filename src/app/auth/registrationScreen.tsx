@@ -52,7 +52,7 @@ export const RegistrationScreen : React.FC = () => {
       <>
         <Header text={"Регистрация"} />
           <form onSubmit={handleSubmit(onSubmit)} className={"form"}>
-            <div className="inputGroup">
+            <div className="input-group">
 
             <Controller 
                 control={control} 
@@ -120,7 +120,7 @@ export const RegistrationScreen : React.FC = () => {
 
             </div>
 
-            <div className="buttonGroup">
+            <div className="button-group">
 
               <div className="desc__text">
                 Нажимая на кнопку, я принимаю
