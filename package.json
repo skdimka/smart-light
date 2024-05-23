@@ -57,5 +57,6 @@
   },
   "devDependencies": {
     "typescript": "^5.4.5"
-  }
+  },
+  "proxy": "http://5.35.98.199"
 }

@@ -33,12 +33,12 @@
 
 // Изменение инпута при ошибке
 .input__error {
-  border-color: red;
+  border-color: $error-color;
 }
 
 .error-message {
   @include text__body-caption;
-  color: red;
+  color: $error-color;
   margin-bottom: 5px;
 }
 

@@ -21,9 +21,6 @@
 
   &__input {
     width: calc(100% - 20px);
-    &-error {
-      border-color: red;
-    }
   }
 
   &__select {
@@ -34,7 +31,7 @@
 
   &__error-message {
     @include text__body-caption;
-    color: red;
+    color: $error-color;
     margin-bottom: 5px;
   }
 
@@ -56,4 +53,8 @@
   &__select:focus {
     border: 1px solid $primary-color;
   }
+}
+
+.device-list__input-error {
+  border-color: $error-color;
 }
