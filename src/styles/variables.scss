@@ -1,0 +1,27 @@
+//font
+$font: "Montserrat", sans-serif;
+
+//max-width screen
+$sm-mobile-screen: 320px;
+
+// COLORS
+
+// background
+$app-bg-color: #f5f7f9;
+// element
+$element-color: #ffffff;
+$element-disabled-color: #e9ebed;
+// primary
+$primary-color: #7445d0;
+$primary-dark-color: #5a2bb5;
+// text
+$text-color: #000000;
+$text-secondary-color: #888888;
+$text-blind-color: #b4b4b4;
+$text-contrast-color: $element-color;
+// divider & border
+$divider-color: #f1f1f1;
+$border-color: $divider-color;
+// system
+$success-color: #2cd178;
+$error-color: #eb5757;

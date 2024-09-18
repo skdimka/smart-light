@@ -1,0 +1,50 @@
+@import "./variables.scss";
+
+@mixin text__h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+}
+
+@mixin text__button {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+@mixin text__button-small {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+@mixin text__body {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+@mixin text__body-medium {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+@mixin text__body-small {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+@mixin text__body-caption {
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 500;
+}
+
+@mixin text__navigation {
+  font-size: 10px;
+  line-height: 18px;
+  font-weight: 500;
+  color: $text-blind-color;
+}

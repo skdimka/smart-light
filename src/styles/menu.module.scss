@@ -1,0 +1,54 @@
+.menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: $element-color;
+  padding: 10px 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-decoration: none;
+    cursor: pointer;
+
+    &-svg-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+
+    &-svg {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      color: $text-secondary-color;
+
+      &--active {
+        color: $primary-color;
+      }
+    }
+
+    &-text {
+      @include text__navigation;
+      margin-top: 5px;
+      white-space: nowrap;
+
+      &--active {
+        color: $text-color;
+      }
+    }
+  }
+}

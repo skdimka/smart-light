@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  margin: 32px 20px 32px 20px;
+
+  &__btn-back {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      padding: 0 5px;
+    }
+  }
+  &-text {
+    margin-right: 20px;
+    flex: 1;
+    text-align: center;
+    @include text__body-small;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  height: 320px;
+  margin-bottom: 20px;
+}
+
+.loader {
+  margin: auto;
+}

@@ -1,0 +1,58 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 0 20px;
+  margin-right: var(--margin-bottom);
+}
+
+.input__default {
+  @include text__body-medium;
+  font: $font;
+  display: block;
+  border-radius: 8px;
+  font-family: $font;
+  min-height: 48px;
+  min-width: 100%;
+  color: black;
+  background: $element-color;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid $divider-color;
+  padding: 0 0 0 20px;
+  appearance: none;
+  outline: none;
+}
+
+.input__default::placeholder {
+  color: $text-blind-color;
+}
+
+.input__default:focus {
+  border: 1px solid $primary-color;
+}
+
+// Изменение инпута при ошибке
+.input__error {
+  border-color: $error-color;
+}
+
+.error-message {
+  @include text__body-caption;
+  color: $error-color;
+  margin-bottom: 5px;
+}
+
+// Глазик
+
+.field__inner {
+  position: relative;
+}
+
+.field-switch {
+  position: absolute;
+  top: 55%;
+  right: 0px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1;
+}

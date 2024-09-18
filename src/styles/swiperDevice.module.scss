@@ -1,0 +1,25 @@
+.devices-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.devices-container-swaiper {
+  position: relative;
+}
+
+.Swiper__devices {
+  width: 100%;
+}
+
+.Swiper__devices-slide {
+  padding: 0;
+  margin: 0;
+}
+
+.Swiper__Slide-delete {
+  align-self: center;
+  max-width: max-content;
+  height: 100px;
+  padding-right: 20px;
+}

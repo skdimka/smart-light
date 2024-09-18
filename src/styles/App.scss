@@ -1,0 +1,52 @@
+@import "normalize.css";
+@import "./variables.scss";
+@import "./mixins.scss";
+@import "./menu.module.scss";
+@import "./button.module.scss";
+@import "./authInput.module.scss";
+@import "./swiperTab.module.scss";
+@import "./swiperDevice.module.scss";
+@import "./devices.module.scss";
+@import "./headerHome.module.scss";
+@import "./temleteScreen.module.scss";
+@import "./addDeviceScreen.module.scss";
+@import "./text.module.scss";
+
+#root {
+  overflow-x: hidden;
+  --margin: 0px 20px;
+  --margin-bottom: 20px;
+}
+
+body {
+  margin: 0;
+  font-family: $font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  height: 100%;
+  background-color: $app-bg-color;
+}
+
+code {
+  font-family: $font;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.light {
+  background-color: $element-color;
+}
+
+.gray {
+  background-color: $app-bg-color;
+}
+
+footer {
+  text-align: center;
+  margin-bottom: var(--margin-bottom);
+}

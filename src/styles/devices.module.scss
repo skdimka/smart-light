@@ -1,0 +1,68 @@
+.Swiper__devices {
+  border-bottom: 2px solid $app-bg-color;
+}
+
+.device {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 10px 20px;
+
+  &-svg {
+    padding: 0;
+
+    &-delete {
+      padding-left: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 30px;
+      border: none;
+    }
+  }
+
+  &-name {
+    padding-left: 10px;
+    align-self: center;
+    justify-self: start;
+    margin-right: auto;
+
+    @include text__body;
+  }
+
+  &-btn {
+    padding-left: 0;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: none;
+    border: none;
+    margin-left: auto;
+
+    &-delete {
+      padding-left: 0;
+      border: none;
+      background: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 30px;
+    }
+  }
+}
+
+.device-add {
+  display: flex;
+  padding: 15px 5px;
+
+  &-svg {
+    padding: 10px;
+    margin-left: 10px;
+    align-self: center;
+  }
+
+  &-text {
+    color: $primary-color;
+    align-self: center;
+    text-decoration: none;
+  }
+}
